@@ -31,7 +31,7 @@ This repository contains Python and MATLAB implementations of Huffman coding, a 
 ## Files
 
 - `Python`: `Huffman.py`
-- `Matlab`: `Node.m`, `HuffmanFunctions.m`, `printNodes.m`, `MainHuffman.m`
+- `Matlab`: `Node.m`, `buildHuffmanTree.m`, `printNodes.m`, `MainHuffman.m`
 
 ## Example Data
 
