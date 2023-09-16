@@ -1,4 +1,4 @@
-import heapq
+import heapq, math
 
 class node:
     def __init__(self, value, symbol, children=None):
@@ -32,6 +32,20 @@ def buildHuffmanTree(symbols, values, base):
         
     return nodes[0]
 
+def calculate_entropy(probabilities, base):
+    entropy = -sum(p * math.log(p, base) for p in probabilities if p > 0)
+    return entropy
+
+def calculate_average_code_length(symbols, probabilities, huffman_codes):
+    pro_sym = {symbol: probability for symbol,probability in zip(symbols,probabilities)}
+    total_length = list(len(list(huffman_codes[symbol])) * pro_sym[symbol] for symbol in symbols)
+
+    return sum(total_length)
+
+def calculate_efficiency(entropy, average_code_length):
+    efficiency = entropy / average_code_length
+    return efficiency
+
 if __name__ == "__main__":
     # Define the base (e.g., 2, 3, 4, ...)
     base = 3
@@ -45,3 +59,15 @@ if __name__ == "__main__":
 
     # Printing the result Huffman Code
     printNodes(root)
+    
+    # H -> Entropy
+    entropy = calculate_entropy(values, base)
+    print("Entropy : ",round(entropy,4))
+
+    #L -> AvgCodeLength
+    average_code_length = calculate_average_code_length(symbols, values, huffman)
+    print("Average Code Word Length: ",round(average_code_length,4))
+
+    # Calculate efficiency
+    efficiency = calculate_efficiency(entropy, average_code_length)
+    print("Efficiency: ",round(efficiency,4))
